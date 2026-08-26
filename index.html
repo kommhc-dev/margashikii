@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Portofolio Saya</title>
+
+<style>
+/* CSS Reset dan Variabel */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+html {
+    scroll-behavior: smooth; /* Animasi scroll yang halus */
+}
+
+/* Tema Terang (Default) */
+body {
+    background: #f4f4f4;
+    color: #333;
+    transition: background 0.3s, color 0.3s;
+}
+
+header {
+    background: #0077cc;
+    color: white;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+header h1 {
+    font-size: 28px;
+}
+
+.header-controls {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+/* Navigasi */
+nav {
+    display: flex;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    margin-left: 20px;
+    font-weight: bold;
+    transition: color 0.3s;
+}
+
+nav a:hover {
+    color: yellow;
+}
+
+/* Hamburger Menu (Sembunyi di PC) */
+.hamburger {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+    gap: 5px;
+}
+
+.hamburger div {
+    width: 25px;
+    height: 3px;
+    background: white;
+    transition: 0.3s;
+}
+
+/* Tombol Dark Mode */
+#darkModeToggle {
+    background: none;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+    color: white;
+}
+
+/* Bagian Konten */
+.hero {
+    text-align: center;
+    background: white;
+    padding: 50px 20px;
+    transition: background 0.3s;
+}
+
+.hero img {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    border: 4px solid #0077cc;
+    margin-bottom: 15px;
+}
+
+.hero h2 {
+    font-size: 30px;
+    color: #0077cc;
+}
+
+.hero p {
+    margin-top: 10px;
+}
+
+section {
+    width: 85%;
+    max-width: 900px;
+    margin: 25px auto;
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    transition: background 0.3s, color 0.3s;
+}
+
+section h2 {
+    color: #0077cc;
+    margin-bottom: 15px;
+}
+
+ul {
+    padding-left: 20px;
+}
+
+.project {
+    background: #eef5ff;
+    padding: 15px;
+    margin-top: 15px;
+    border-left: 5px solid #0077cc;
+    border-radius: 5px;
+    transition: background 0.3s;
+}
+
+footer {
+    background: #0077cc;
+    color: white;
+    text-align: center;
+    padding: 15px;
+    margin-top: 30px;
+}
+
+/* --- Dark Mode Styles --- */
+body.dark-mode {
+    background: #121212;
+    color: #e0e0e0;
+}
+
+body.dark-mode header, 
+body.dark-mode footer {
+    background: #004d80;
+}
+
+body.dark-mode .hero, 
+body.dark-mode section {
+    background: #1e1e1e;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.5);
+}
+
+body.dark-mode .hero h2, 
+body.dark-mode section h2 {
+    color: #66b3ff;
+}
+
+body.dark-mode .project {
+    background: #2a2a2a;
+    border-left: 5px solid #66b3ff;
+}
+
+/* --- Tombol Back to Top --- */
+#backToTop {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    display: none;
+    background: #0077cc;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 50px;
+    cursor: pointer;
+    font-size: 18px;
+    z-index: 1000;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+    transition: background 0.3s;
+}
+
+#backToTop:hover {
+    background: #005599;
+}
+
+body.dark-mode #backToTop {
+    background: #66b3ff;
+    color: #121212;
+}
+
+/* --- Responsive HP (Mobile) --- */
+@media(max-width: 768px) {
+    header {
+        flex-direction: row;
+        justify-content: space-between;
+    }
+
+    /* Tampilkan Hamburger di HP */
+    .hamburger {
+        display: flex;
+        order: 2; /* Taruh di kanan */
+    }
+
+    .header-controls {
+        order: 1; /* Dark mode di sebelah kiri hamburger */
+    }
+
+    /* Sembunyikan Navigasi Default di HP */
+    nav {
+        display: none;
+        flex-direction: column;
+        width: 100%;
+        text-align: center;
+        background: #0077cc;
+        margin-top: 15px;
+        padding-bottom: 15px;
+        order: 3;
+    }
+
+    body.dark-mode nav {
+        background: #004d80;
+    }
+
+    /* Class untuk memunculkan menu */
+    nav.active {
+        display: flex;
+    }
+
+    nav a {
+        display: block;
+        margin: 10px 0;
+    }
+}
+</style>
+
+</head>
+<body>
+
+<header>
+    <h1>Portofolio Saya</h1>
+    
+    <div class="header-controls">
+        <button id="darkModeToggle" onclick="toggleDarkMode()">🌙</button>
+        <div class="hamburger" onclick="toggleMenu()">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+    </div>
+
+    <nav id="navbar">
+        <a href="#tentang" onclick="closeMenu()">Tentang</a>
+        <a href="#skill" onclick="closeMenu()">Skill</a>
+        <a href="#proyek" onclick="closeMenu()">Proyek</a>
+        <a href="#pendidikan" onclick="closeMenu()">Pendidikan</a>
+        <a href="#kontak" onclick="closeMenu()">Kontak</a>
+    </nav>
+</header>
+
+<section class="hero">
+    <img src="hf.jpg.jpeg" alt="Foto Profil">
+    <h2>Halo, Saya Raden And Hafizh</h2>
+    <p>Saya seorang pelajar</p>
+</section>
+
+<section id="tentang">
+    <h2>Tentang Saya</h2>
+    <p>Saya adalah seorang pelajar yang memiliki minat di dunia gaming.</p>
+</section>
+
+<section id="skill">
+    <h2>Skill</h2>
+    <ul>
+        <li>Main Game</li>
+        <li>Cepat Adaptasi</li>
+        <li>Pintar dalam memahami situasi</li>
+        <li>GOAT MLBB</li>
+    </ul>
+</section>
+
+<section id="proyek">
+    <h2>Proyek</h2>
+    <div class="project">
+        <h3>Joki</h3>
+        <p>Menaikan rank akun</p>
+    </div>
+    <div class="project">
+        <h3>Store Top Up</h3>
+        <p>Menjual berbagai macam top up game</p>
+    </div>
+    <div class="project">
+        <h3>Jasa Top Christmas</h3>
+        <p>Menaikan christmas account agar terlihat menarik</p>
+    </div>
+</section>
+
+<section id="pendidikan">
+    <h2>Pendidikan Raden</h2>
+    <ul>
+        <li>RADEN 2000-2001 </li>
+        <li>SD BEOR 2 2005-2008</li>
+        <li>MTS IJ 1045-1500</li>
+        <li>SMK MUTHIA HARAPAN 1945-1999</li>
+    </ul>
+</section>
+
+<section>
+    <h2>Pendidikan Hafizh</h2>
+    <ul>
+        <li>HAFIZH</li>
+        <li>SDN CIGUGUR tahun 2015-2021</li>
+        <li>SMP DARUL FALAH tahun 2021-2024</li>
+        <li>SMK MUTHIA HARAPAN CICALENGKA 2024-sekarang</li>
+    </ul>
+</section>
+
+<section id="kontak">
+    <h2>Kontak</h2>
+    <p>📧 Email: nama@email.com</p>
+    <p>📱 WhatsApp: 08xxxxxxxxxx</p>
+    <p>📸 Instagram: @username</p>
+</section>
+
+<footer>
+    <p>&copy; 2026 Portofolio Saya. All Rights Reserved.</p>
+</footer>
+
+<!-- Tombol Back to Top -->
+<button id="backToTop" onclick="scrollToTop()">↑</button>
+
+<script>
+    // FUNGSI HAMBURGER MENU
+    function toggleMenu() {
+        const nav = document.getElementById("navbar");
+        nav.classList.toggle("active");
+    }
+
+    // Menutup menu saat link diklik (di HP)
+    function closeMenu() {
+        const nav = document.getElementById("navbar");
+        if (nav.classList.contains("active")) {
+            nav.classList.remove("active");
+        }
+    }
+
+    // FUNGSI DARK MODE
+    function toggleDarkMode() {
+        document.body.classList.toggle("dark-mode");
+        const btn = document.getElementById("darkModeToggle");
+        
+        if (document.body.classList.contains("dark-mode")) {
+            btn.innerText = "☀️"; // Ikon matahari untuk mode terang
+        } else {
+            btn.innerText = "🌙"; // Ikon bulan untuk mode gelap
+        }
+    }
+
+    // FUNGSI BACK TO TOP
+    window.onscroll = function() {
+        const btn = document.getElementById("backToTop");
+        // Tampilkan tombol jika scroll lebih dari 200px
+        if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) {
+            btn.style.display = "block";
+        } else {
+            btn.style.display = "none";
+        }
+    };
+
+    function scrollToTop() {
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth"
+        });
+    }
+</script>
+
+</body>
+</html>
